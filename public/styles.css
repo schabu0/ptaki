@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  color: inherit;
+}
+
+div.MuiCard-root {
+  width: 100%;
+  max-width: unset;
+}
+
+.MuiFormControl-root.MuiTextField-root {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.MuiPaper-root.MuiCard-root  {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+div.MuiCardActions-root {
+  justify-content: end;
+}

@@ -1,67 +1,22 @@
-/* eslint-disable no-console, react/prop-types */
-/**
-* Below code is just for example. Don't actually write code like this, use something like redux or
-* mobx for managing state and API concerns.
-*/
-import React from 'react';
+import React, { useEffect } from 'react';
+import BirdCard from './BirdCard';
+import Grid from '@material-ui/core/Grid';
 
-class Home extends React.Component {
-
-  state = {
-    isFetching: false,
-    users: []
-  }
-
-  componentDidMount() {
-    this.fetchUsers();
-  }
-
-  fetchUsers = async function () {
-    this.setState({ isFetching: true });
-    try {
-      const res = await fetch('/api/users');
-      const users = await res.json();
-
-      this.setState({ users, isFetching: false });
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
-
-  addUser = async function () {
-    try {
-
-      await fetch('/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username: `User${Date.now()}`
-        })
+export default function Home({setIsBackButton, fetch, birds, onBirdRemove }) {
+  useEffect(async () => {
+    setIsBackButton(false);
+    fetch()
+      .then((response) => {
+        console.log(response);
       });
-
-      this.fetchUsers();
-    } catch (err) {
-      console.log(err.message);
-    }
-  }
-
-
-  render() {
-    return (
-      <div>
-        <h3>Homepage</h3>
-        <button onClick={() => !this.state.isFetching && this.addUser()}>Add a user</button>
-        <h5>Users</h5>
-        <ul>
-          {this.state.users.map(user =>
-            <li key={user.username}>{user.username}</li>
-          )}
-        </ul>
-      </div>
-    );
-  }
+  }, []);
+  return (
+    <Grid container spacing={2} className="my-4">
+        {birds.map((bird) => (
+          <Grid key={bird._id} className={'justify-content-center d-flex'} item xs={12} lg={6}>
+            <BirdCard bird={bird} onRemove={onBirdRemove}></BirdCard>
+          </Grid>
+        ))}
+    </Grid>
+  );
 }
-
-export default Home;
