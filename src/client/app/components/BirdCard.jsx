@@ -71,7 +71,7 @@ export default function BirdCard({ bird, description, onRemove }) {
         subheader={bird.shortDescription}
       />
       {bird.photo && <CardMedia
-        className={classes.media}
+        className={classes.media + ' image'}
         image={bird.photo}
         title={bird.name}
       />}

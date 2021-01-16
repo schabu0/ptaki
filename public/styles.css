@@ -29,3 +29,12 @@ div.MuiCard-root {
 div.MuiCardActions-root {
   justify-content: end;
 }
+
+.image {
+  transition-duration: 0.3s;
+}
+
+.image:hover {
+  transform: rotate(10deg);
+  transition-duration: 0.3s;
+}
